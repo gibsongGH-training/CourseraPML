@@ -1,4 +1,4 @@
-# CourseraPML
+CourseraPML
 Practical Machine Learning
 
 Greg Gibson
@@ -18,7 +18,7 @@ Reduce the number of ineffective variables.  First, per the Covariate Creation l
 
 Next, address the NAs.  The is.na function will identify NAs as True/False, and I use an apply function to sum each column variable.  If the sum of NAs is greater than 19,000, that variable is True.  I then create a subfile with only the variables that are False, meaning they do not have over 19,000 NAs.  This removed 41 additional variables and left 59.       
   missingTrain <- apply(is.na(trainfileSub1), 2, sum) > 19000 
-  # TRUE if column has more than 19,000 NAs
+  'TRUE if column has more than 19,000 NAs
   trainfileSub2 <- trainfileSub1[,which(missingTrain==FALSE)] # 59 variables
 
 A minor adjustment.  The first six remaining variables appear to be observation number, names, timestamps and windows, not related to our exercise prediction.  The last sub file removes these and has 53 remaining variables.
@@ -32,7 +32,7 @@ The same steps are conducted to prepare the provided testing data.  The training
 
 Model Training
 As noted in the lecture series, Random Forest and Boosting are considered very effective and popular prediction models.  I’ll use those, but first apply a single Decision Tree for comparison, per the Predicting with Trees and Caret Package lectures.
-	Decision Tree
+  Decision Tree
   modelFit <- train(classe ~., data=training, method = "rpart")  
   predictions <- predict(modelFit, newdata=validation)  
   confusionMatrix(validation$classe, predictions)
@@ -110,6 +110,6 @@ Apply the trained Random Forest model to our testing data to predict the new sub
 final <- predict(modelFit, newdata=testfileSub3)
 final
     
-[1] B A B A A E D B A A B C B A E E A B B B
+'[1] B A B A A E D B A A B C B A E E A B B B
 Levels: A B C D E
 
